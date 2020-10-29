@@ -1,8 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from web_api.models import Detector, Dataset
+from rest_framework import viewsets
+from rest_framework import permissions
+from web_api.serializers import DetectorSerializer, DatasetSerializer
 
-# Create your views here.
+
+class DetectorViewSet(viewsets.ModelViewSet):
+    queryset = Detector.objects.all()
+    serializer_class = DetectorSerializer
+    # permission_classes = [permissions.IsAuthenticated]
 
 
-def index(request):
-    return HttpResponse("Ciao Gio, Genny e Giuly!")
+class DatasetViewSet(viewsets.ModelViewSet):
+    queryset = Dataset.objects.all()
+    serializer_class = DatasetSerializer
+    # permission_classes = [permissions.IsAuthenticated]

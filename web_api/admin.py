@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from web_api.models import Dataset, Detector
+
+admin.site.register(Dataset)
+admin.site.register(Detector)
