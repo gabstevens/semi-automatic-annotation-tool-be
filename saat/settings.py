@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'web_api'
+    'rest_framework.authtoken',
+    'web_api',
+    'django_q'
 ]
 
 MIDDLEWARE = [
@@ -76,8 +78,12 @@ WSGI_APPLICATION = 'saat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'saat-mongo-db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'saatdb',
+        'USER': 'postgres',
+        'PASSWORD': 'password', 
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -128,3 +134,23 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+Q_CLUSTER = {
+    'name': 'saat',
+    'workers': 2,
+    'recycle': 500,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': {
+        'host': '127.0.0.1',
+        'port': 6379,
+        'db': 0
+    }
+}
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'web_api/datasets')
+MEDIA_URL = '/media/'
