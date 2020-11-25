@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -131,6 +132,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
@@ -139,7 +143,6 @@ Q_CLUSTER = {
     'name': 'saat',
     'workers': 2,
     'recycle': 500,
-    'timeout': 60,
     'compress': True,
     'save_limit': 250,
     'queue_limit': 500,
@@ -154,3 +157,7 @@ Q_CLUSTER = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'web_api/datasets')
 MEDIA_URL = '/media/'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}

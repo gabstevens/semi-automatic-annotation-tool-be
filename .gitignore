@@ -113,3 +113,6 @@ media/
 # **/migrations/**
 # !**/migrations
 # !**/migrations/__init__.py
+
+# Datasets folder
+web_api/datasets/*
